@@ -9,3 +9,33 @@
 @import url(../blocks/header/__logo/header__logo.css);
 
 @import url(../blocks/profile/profile.css);
+
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+
+@import url(../blocks/profile/__button-image/profile__button-image.css);
+
+@import url(../blocks/profile/__button/_add/profile__button_add.css);
+
+@import url(../blocks/profile/__button/_edit/profile__button_edit.css);
+
+@import url(../blocks/profile/__button-image/_edit/profile__button-image_edit.css);
+
+@import url(../blocks/profile/__info/profile__info.css);
+
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+
+@import url(../blocks/profile/__title/profile__title.css);
+
+@import url(../blocks/elements/elements.css);
+
+@import url(../blocks/elements/__button-image/_heart/elements__button-image_heart.css);
+
+@import url(../blocks/elements/__button/_heart/elements__button_heart.css);
+
+@import url(../blocks/elements/__card/elements__card.css);
+
+@import url(../blocks/elements/__figcaption/elements__figcaption.css);
+
+@import url(../blocks/elements/__image/elements__image.css);
+
+@import url(../blocks/elements/__title/elements__title.css);
