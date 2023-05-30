@@ -19,20 +19,33 @@
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <h2 class="profile__subtitle">Исследователь океана</h2>
                 <button type="button" class="profile__button profile__button_edit">
-                    <img src="images/Vector.svg" alt="" class="profile__button-image profile__button-image_edit">
+                    <img src="images/Vector.svg" alt="" class="profile__button-icon profile__button-icon_edit">
                 </button>
             </div>
             <button type="button" class="profile__button profile__button_add">
-                <img src="images/add.svg" alt="" class="profile__button-image">
+                <img src="images/add.svg" alt="" class="profile__button-icon profile__button-icon_add">
             </button>
         </section>
+        <div class="popup">
+            <div class="popup__overlay"></div>
+            <div class="popup__container">
+                <label class="popup__title">Редактировать профиль
+                    <form class="popup__form">
+                        <label class="popup__title">Редактировать профиль
+                            <input type="text" class="popup__input" placeholder="Жак-Ив Кусто">
+                            <textarea class="popup__input" placeholder="Исследователь океана"></textarea>
+                        </label>
+                        <button type="submit" class="popup__button">Сохранить</button>
+                    </form>
+            </div>
+        </div>
         <section class="elements">
             <figure class="elements__card">
                 <img src="images/elements__card_dubrovitsy.jpg" alt="" class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Дубровицы</h2>
                     <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-image elements__button-image_heart">
+                        <img src="images/heart.svg" alt="" class="elements__button-icon elements__button-icon_heart">
                     </button>
                 </figcaption>
             </figure>
@@ -84,7 +97,7 @@
         </section>
     </main>
     <footer class="footer">
-        <h2 class="footer__title"></h2>
+        <h2 class="footer__title">© 2020 Mesto Russia</h2>
     </footer>
 </body>
 </html>
