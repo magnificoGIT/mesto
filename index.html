@@ -27,17 +27,16 @@
             </button>
         </section>
         <div class="popup">
-            <div class="popup__overlay"></div>
-            <div class="popup__container">
+            <form class="popup__container">
+                <button class="popup__button popup__button_close">
+                    <img src="images/popup__button-icon_close.svg" alt="" class="popup__button-icon popup__button-icon_close">
+                </button>
                 <label class="popup__title">Редактировать профиль
-                    <form class="popup__form">
-                        <label class="popup__title">Редактировать профиль
-                            <input type="text" class="popup__input" placeholder="Жак-Ив Кусто">
-                            <textarea class="popup__input" placeholder="Исследователь океана"></textarea>
-                        </label>
-                        <button type="submit" class="popup__button">Сохранить</button>
-                    </form>
-            </div>
+                    <input type="text" class="popup__input" placeholder="Жак-Ив Кусто">
+                    <input class="popup__input" placeholder="Исследователь океана">
+                    <button type="submit" class="popup__button popup__button_save">Сохранить</button>
+                </label>
+            </form>
         </div>
         <section class="elements">
             <figure class="elements__card">
