@@ -8,6 +8,12 @@
     height: 32px;
     margin-left: 100%;
     margin-bottom: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+.popup__button_close:hover {
+    opacity: 0.6;
 }
 
 @media screen and (max-width: 650px) {

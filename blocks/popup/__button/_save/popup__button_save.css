@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.popup__button_save:hover {
+    opacity: 0.8;
+}
+
 @media screen and (max-width: 760px) {
     .popup__button_save {
         min-height: 46px;

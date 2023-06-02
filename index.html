@@ -26,18 +26,6 @@
                 <img src="images/add.svg" alt="" class="profile__button-icon profile__button-icon_add">
             </button>
         </section>
-        <div class="popup">
-            <form class="popup__container">
-                <button class="popup__button popup__button_close">
-                    <img src="images/popup__button-icon_close.svg" alt="" class="popup__button-icon popup__button-icon_close">
-                </button>
-                <label class="popup__title">Редактировать профиль
-                    <input type="text" class="popup__input" placeholder="Жак-Ив Кусто">
-                    <input class="popup__input" placeholder="Исследователь океана">
-                    <button type="submit" class="popup__button popup__button_save">Сохранить</button>
-                </label>
-            </form>
-        </div>
         <section class="elements">
             <figure class="elements__card">
                 <img src="images/elements__card_dubrovitsy.jpg" alt="" class="elements__image">
@@ -94,9 +82,22 @@
                 </figcaption>
             </figure>
         </section>
+        <section class="popup">
+            <form class="popup__container">
+                <button type="button" class="popup__button popup__button_close">
+                    <img src="images/popup__button-icon_close.svg" alt="" class="popup__button-icon popup__button-icon_close">
+                </button>
+                <label class="popup__title">Редактировать профиль
+                    <input type="text" class="popup__input popup__input_name" value="Жак-Ив Кусто">
+                    <input type="text" class="popup__input popup__input_about-myself" value="Исследователь океана">
+                    <button type="submit" class="popup__button popup__button_save">Сохранить</button>
+                </label>
+            </form>
+        </section>
     </main>
     <footer class="footer">
         <h2 class="footer__title">© 2020 Mesto Russia</h2>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
