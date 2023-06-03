@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML5, CSS, JavaScript">
     <meta name="author" content="Игорь Кляйн">
     <link rel="stylesheet" href="pages/index.css">
     <title>Mesto</title>
@@ -14,70 +15,72 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img src="images/profile__avatar.jpg" alt="" class="profile__avatar">
+            <img src="images/profile__avatar.jpg" alt="Круглое изображение, в фокусе которого находится улыбающийся Жак-Ив Кусто в красной шапке" class="profile__avatar">
             <div class="profile__info">
-                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <div class="profile__container">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile__button profile__button_edit">
+                        <img src="images/Vector.svg" alt="Иконка кнопки в виде карандаша" class="profile__button-icon profile__button-icon_edit">
+                    </button>
+                </div>
                 <h2 class="profile__subtitle">Исследователь океана</h2>
-                <button type="button" class="profile__button profile__button_edit">
-                    <img src="images/Vector.svg" alt="" class="profile__button-icon profile__button-icon_edit">
-                </button>
             </div>
             <button type="button" class="profile__button profile__button_add">
-                <img src="images/add.svg" alt="" class="profile__button-icon profile__button-icon_add">
+                <img src="images/add.svg" alt="Иконка кнопки в виде плюса" class="profile__button-icon profile__button-icon_add">
             </button>
         </section>
         <section class="elements">
             <figure class="elements__card">
-                <img src="images/elements__card_dubrovitsy.jpg" alt="" class="elements__image">
+                <img src="images/elements__card_dubrovitsy.jpg" alt="Изображена Церковь Знамения Пресвятой Богоро́дицы в Дубровицах. В середине возвышается единственная башня с позолоченным открытым куполом и крестом на самом вверху." class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Дубровицы</h2>
-                    <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-icon elements__button-icon_heart">
+                    <button type="button" class="elements__button elements__button_heart">
+                        <img src="images/heart.svg" alt="Иконка кнопки ввиде сердца" class="elements__button-icon elements__button-icon_heart">
                     </button>
                 </figcaption>
             </figure>
             <figure class="elements__card">
-                <img src="images/elements__card_ivanovo.jpg" alt="" class="elements__image">
+                <img src="images/elements__card_ivanovo.jpg" alt="На фотографии изображен ввид с высоты птичего полета на район города Иваново. Первым планом выступает 9-ти этажка панельного вида, за ней выступает ряд таких же многоэтажных домов" class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Иваново</h2>
-                    <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-image elements__button-image_heart">
+                    <button type="button" class="elements__button elements__button_heart">
+                        <img src="images/heart.svg" alt="Иконка кнопки ввиде сердца" class="elements__button-image elements__button-image_heart">
                     </button>
                 </figcaption>
             </figure>
             <figure class="elements__card">
-                <img src="images/elements__card_karelia.jpg" alt="" class="elements__image">
+                <img src="images/elements__card_karelia.jpg" alt="На фотографии изображена лесная река идущая вдоль крутых склонов горной породы на которой раскинулись хвойные деревья. На первом плане видна не большая лодка с двумя путешественниками в оранжевых желетах" class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Карелия</h2>
-                    <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-image elements__button-image_heart">
+                    <button type="button" class="elements__button elements__button_heart">
+                        <img src="images/heart.svg" alt="Иконка кнопки ввиде сердца" class="elements__button-image elements__button-image_heart">
                     </button>
                 </figcaption>
             </figure>
             <figure class="elements__card">
-                <img src="images/elements__card_Kizhi.jpg" alt="" class="elements__image">
+                <img src="images/elements__card_Kizhi.jpg" alt="Фотография сделана на опушке, на первом плане виднеется два одуванчика, а в фокусе архитектурный ансамбль из двух деревянных церквей" class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Кижи</h2>
-                    <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-image elements__button-image_heart">
+                    <button type="button" class="elements__button elements__button_heart">
+                        <img src="images/heart.svg" alt="Иконка кнопки ввиде сердца" class="elements__button-image elements__button-image_heart">
                     </button>
                 </figcaption>
             </figure>
             <figure class="elements__card">
-                <img src="images/elements__card_Krasnoyarsk.jpg" alt="" class="elements__image">
+                <img src="images/elements__card_Krasnoyarsk.jpg" alt="На фотографии изображен пейзаж лесного озера. На первом плане виднеется волнистый слой воды, а на горизонте раскинувшиеся холмы покрытые хвойными деревьями" class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Красноярск</h2>
-                    <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-image elements__button-image_heart">
+                    <button type="button" class="elements__button elements__button_heart">
+                        <img src="images/heart.svg" alt="Иконка кнопки ввиде сердца" class="elements__button-image elements__button-image_heart">
                     </button>
                 </figcaption>
             </figure>
             <figure class="elements__card">
-                <img src="images/elements__card_leningradskay oblast.jpg" alt="" class="elements__image">
+                <img src="images/elements__card_leningradskay oblast.jpg" alt="На фотографии изображенна деревянная церковь с большим количеством небольших куполов идущие друг за другом и возвышаясь к самому верхнему куполу" class="elements__image">
                 <figcaption class="elements__figcaption">
                     <h2 class="elements__title">Церковь Преображения Господня</h2>
-                    <button class="elements__button elements__button_heart">
-                        <img src="images/heart.svg" alt="" class="elements__button-image elements__button-image_heart">
+                    <button type="button" class="elements__button elements__button_heart">
+                        <img src="images/heart.svg" alt="Иконка кнопки ввиде сердца" class="elements__button-image elements__button-image_heart">
                     </button>
                 </figcaption>
             </figure>
@@ -85,11 +88,11 @@
         <section class="popup">
             <form class="popup__container">
                 <button type="button" class="popup__button popup__button_close">
-                    <img src="images/popup__button-icon_close.svg" alt="" class="popup__button-icon popup__button-icon_close">
+                    <img src="images/popup__button-icon_close.svg" alt="Иконка кнопки в виде крестика" class="popup__button-icon popup__button-icon_close">
                 </button>
                 <label class="popup__title">Редактировать профиль
-                    <input type="text" class="popup__input popup__input_name" value="Жак-Ив Кусто">
-                    <input type="text" class="popup__input popup__input_about-myself" value="Исследователь океана">
+                    <input autocomplete="username" type="text" name="name" class="popup__input popup__input_name">
+                    <input autocomplete="work" type="text" name="about-myself" class="popup__input popup__input_about-myself">
                     <button type="submit" class="popup__button popup__button_save">Сохранить</button>
                 </label>
             </form>

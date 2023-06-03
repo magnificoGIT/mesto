@@ -14,3 +14,11 @@
 .elements__button_heart:hover {
     opacity: 0.5;
 }
+
+.elements__button_heart:active {
+    background-image: url('../../../../images/blackHeart.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+}

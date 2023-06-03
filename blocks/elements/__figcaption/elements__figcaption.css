@@ -1,5 +1,6 @@
 .elements__figcaption {
-    margin: 25px auto 31px auto;
+    margin: 0;
+    margin: 25px 15px 31px 21px;
     max-width: 246px;
     padding: 0;
     display: flex;
