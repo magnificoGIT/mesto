@@ -1,4 +1,4 @@
-.popup__button_close {
+.popup__button_type_close {
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
     border: none;
@@ -6,18 +6,18 @@
     padding: 0;
     z-index: 3;
     height: 32px;
-    margin-left: 100%;
+    margin-left: 438px;
     margin-bottom: 8px;
     width: 32px;
     height: 32px;
 }
 
-.popup__button_close:hover {
+.popup__button_type_close:hover {
     opacity: 0.6;
 }
 
 @media screen and (max-width: 650px) {
-    .popup__button_close {
+    .popup__button_type_close {
         width: 20px;
         height: 20px;
         margin: 0;
