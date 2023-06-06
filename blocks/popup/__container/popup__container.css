@@ -1,5 +1,4 @@
 .popup__container {
-    max-width: auto;
     display: flex;
     flex-direction: column;
     z-index: 3;
