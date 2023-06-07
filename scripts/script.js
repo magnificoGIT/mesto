@@ -11,11 +11,11 @@ let popupInputAboutMyself = popupForm.querySelector('.popup__input_type_about-my
 
 //Функции открытия и закрытия popup
 function popupOpen() {
-    popup.classList.add('popup__opened_active');
+    popup.classList.add('popup_active');
     fillingFormPopup();
 }
 function popupClose() {
-    popup.classList.remove('popup__opened_active');
+    popup.classList.remove('popup_active');
 }
 //Функция заполненых полей при открытии popup
 function fillingFormPopup() {
@@ -35,7 +35,7 @@ function handleFormSubmit (evt) {
 
 //Слушатель сохранения редактируемого текста и закрытия popup на кнопку "Сохранить" или клавишу Enter
 popupForm.addEventListener('submit', handleFormSubmit); 
-//Слушатель на удаление класса popup__opened_active для закрытия popup
+//Слушатель на удаление класса popup_active для закрытия popup
 popupButtonClose.addEventListener('click', popupClose);
-//Слушатель на добавление класса popup__opened_active для открытия popup при клике на кнопку редактировать
+//Слушатель на добавление класса popup_active для открытия popup при клике на кнопку редактировать
 profileButtonTypeEdit.addEventListener('click', popupOpen);
