@@ -1,5 +1,4 @@
 const popup = document.querySelector('.popup');
-const popupAdd = document.querySelector('.popup_add');
 const popupButtonClose = document.querySelectorAll('.popup__button_type_close');
 //Переменные секции profile
 const profile = document.querySelector('.profile');
@@ -7,61 +6,24 @@ const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit'
 const profileButtonTypeAdd = profile.querySelector('.profile__button_type_add');
 const profileTitle = profile.querySelector('.profile__title');
 const profileSubtitle = profile.querySelector('.profile__subtitle');
-//Переменные секции element
-const elementsCardImage = document.querySelector('#element-templat-card').content.querySelector('.elements__card');
-const elementsImage = elementsCardImage.querySelector('.elements__image');
-const elementsContainer = elementsCardImage.querySelector('.elements__container')
-const elementsTitle = elementsContainer.querySelector('.elements__title');
-console.dir(elementsCardImage);
-console.dir(elementsContainer);
-
-let popupForm = document.querySelector('.popup__form');
-let popupInputName = popupForm.querySelector('.popup__input_type_name');
-let popupInputAboutMyself = popupForm.querySelector('.popup__input_type_about-myself');
-
-//Функции открытия и закрытия popup
-function popupOpen() {
-    popup.classList.add('popup_active');
-}
-function popupClose(popup) {
-    popup.classList.remove('popup_active');
-}
-//Функция заполненых полей при открытии popup
-function fillingFormPopup() {
-    popupInputName.value = profileTitle.textContent;
-    popupInputAboutMyself.value = profileSubtitle.textContent;
-}
-//Функциии для сохранения редактируемого текста  и закрытия popup на кнопку "Сохранить"
-function savingTextFormPopup() {
-    profileTitle.textContent = popupInputName.value;
-    profileSubtitle.textContent = popupInputAboutMyself.value;
-}
-function handleFormSubmit (evt) {
-    evt.preventDefault();
-    savingTextFormPopup();
-    popupClose(popup);
-}
-//Функция для открытия popup_add
-function openPopupAdd() {
-    popupAdd.classList.add('popup_active');
-}
-
-//Слушатель сохранения редактируемого текста и закрытия popup на кнопку "Сохранить" или клавишу Enter
-popupForm.addEventListener('submit', handleFormSubmit);
-//Слушатель на удаление класса popup_active для закрытия popup
-popupButtonClose.forEach((button) => {
-    button.addEventListener('click', function() {
-        popupClose(button.closest('.popup'));
-    })
-});
-//Слушатель на добавление класса popup_active для открытия popup при клике на кнопку редактировать
-profileButtonTypeEdit.addEventListener('click', function() {
-    popupOpen();
-    fillingFormPopup();
-});
-//Слушатели для открытия popup_add
-profileButtonTypeAdd.addEventListener('click', openPopupAdd);
-
+//Переменные template для секции element
+const templateElement = document.querySelector('#element-templat-card').content.querySelector('.elements__card');
+const elementsContainer = document.querySelector('.elements');
+//Переменные popup для add
+const popupAdd = document.querySelector('.popup_add');
+const popupFormAdd = popupAdd.querySelector('.popup__form_add');
+const popupInputTitle = popupAdd.querySelector('.popup__input_type_title');
+const popupInputUrl = popupAdd.querySelector('.popup__input_type_url');
+//Переменные popup для image
+const popupImg = document.querySelector('.popup_img');
+const popupImage = popupImg.querySelector('.popup__image');
+const imageSubtitle = popupImg.querySelector('.popup__image-subtitle');
+const popupButtonCreate = popupImg.querySelector('.popup__button_type_create');
+//Переменные popup для edit
+const popupForm = document.querySelector('.popup__form');
+const popupInputName = popupForm.querySelector('.popup__input_type_name');
+const popupInputAboutMyself = popupForm.querySelector('.popup__input_type_about-myself');
+//Массив изначальных карточек
 const initialCards = [
     {
         name: 'Таганай',
@@ -88,3 +50,98 @@ const initialCards = [
         link: 'https://images.unsplash.com/photo-1526565688145-39300f9b888f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
     },
 ];
+
+//Функции открытия и закрытия popup
+function popupOpen(popup) {
+    popup.classList.add('popup_active');
+}
+function popupClose(popup) {
+    popup.classList.remove('popup_active');
+}
+//Функция заполненых полей при открытии popup
+function fillingFormPopup() {
+    popupInputName.value = profileTitle.textContent;
+    popupInputAboutMyself.value = profileSubtitle.textContent;
+}
+//Функциии для сохранения редактируемого текста  и закрытия popup на кнопку "Сохранить"
+function savingTextFormPopup() {
+    profileTitle.textContent = popupInputName.value;
+    profileSubtitle.textContent = popupInputAboutMyself.value;
+}
+function handleFormSubmit (evt) {
+    evt.preventDefault();
+    savingTextFormPopup();
+    popupClose(popup);
+}
+//Функция добавления класса с изображением черной кнопки лайка
+function blackLike(event) {
+    const likeBlack = event.target;
+    likeBlack.classList.toggle('elements__button_type_heart-active')
+}
+//Функция для добавления карточки с изображением в секцию elements
+function createCardElements(name, link) {
+    const cardElement = templateElement.cloneNode(true);
+    const imageElement = cardElement.querySelector('.elements__image');
+    const titileElement = cardElement.querySelector('.elements__title');
+    const buttonDeleteElement =  cardElement.querySelector('.elements__button_type_delete');
+    const elementsButtonHeart = cardElement.querySelector('.elements__button_type_heart');
+    const elementsButtonImage = cardElement.querySelector('.elements__button_type_image');
+    
+    imageElement.src = link;
+    titileElement.textContent = name;
+
+    elementsButtonHeart.addEventListener('click', blackLike);
+    buttonDeleteElement.addEventListener('click', () => {
+        cardElement.remove();
+    })
+    elementsButtonImage.addEventListener('click', () => {
+        popupOpen(popupImg);
+        popupImage.src = link;
+        imageSubtitle.textContent = name;
+    });
+
+    return cardElement
+}
+//Функция добавления карточки
+function renderCardElements(data, container) {
+    const newCard = createCardElements(data.name, data.link);
+    container.prepend(newCard);
+}
+//Поиск и добавление всех name и link у массива
+initialCards.forEach(function(item) {
+    renderCardElements(item, elementsContainer);
+});
+//Событие формы создания карточки
+popupFormAdd.addEventListener('submit', function(evt) {
+    evt.preventDefault();
+    if (popupInputTitle.value === '' || popupInputUrl.value === '') {
+            popupClose(popupAdd);
+
+        return
+    }
+    const newDataCard = {
+        name: popupInputTitle.value,
+        link: popupInputUrl.value
+    }
+    renderCardElements(newDataCard, elementsContainer);
+    popupClose(popupAdd);
+    popupInputTitle.value = '';
+    popupInputUrl.value = '';
+});
+//Слушатель сохранения редактируемого текста и закрытия popup на кнопку "Сохранить" или клавишу Enter
+popupForm.addEventListener('submit', handleFormSubmit);
+//Слушатель на удаление класса popup_active для закрытия popup
+popupButtonClose.forEach((button) => {
+    button.addEventListener('click', function() {
+        popupClose(button.closest('.popup'));
+    })
+});
+//Слушатель на добавление класса popup_active для открытия popup при клике на кнопку редактировать
+profileButtonTypeEdit.addEventListener('click', () => {
+    popupOpen(popup);
+    fillingFormPopup();
+});
+//Слушатель для открытия popup_add
+profileButtonTypeAdd.addEventListener('click', () => {
+    popupOpen(popupAdd);
+});

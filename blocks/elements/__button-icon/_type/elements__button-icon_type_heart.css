@@ -3,4 +3,5 @@
     align-self: center;
     max-width: 22px;
     min-height: 19px;
+    pointer-events: none;
 }
