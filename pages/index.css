@@ -80,8 +80,6 @@
 
 @import url(../blocks/popup/__button/_type/popup__button_type_save.css);
 
-@import url(../blocks/popup/__container/_type/popup__container_type_image.css);
-
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 
 @import url(../blocks/popup/__image/popup__image.css);
