@@ -10,12 +10,12 @@ const profileSubtitle = profile.querySelector('.profile__subtitle');
 const templateElement = document.querySelector('#element-templat-card').content.querySelector('.elements__card');
 const elementsContainer = document.querySelector('.elements');
 //Переменные popup для add
-const popupAdd = document.querySelector('.popup__add');
+const popupAdd = document.querySelector('.popup-add');
 const popupFormAdd = popupAdd.querySelector('.popup__form_add');
 const popupInputTitle = popupAdd.querySelector('.popup__input_type_title');
 const popupInputUrl = popupAdd.querySelector('.popup__input_type_url');
 //Переменные popup для image
-const popupImg = document.querySelector('.popup__img');
+const popupImg = document.querySelector('.popup-img');
 const popupImage = popupImg.querySelector('.popup__image');
 const imageSubtitle = popupImg.querySelector('.popup__image-subtitle');
 const popupButtonCreate = popupImg.querySelector('.popup__button_type_create');
@@ -141,7 +141,7 @@ profileButtonTypeEdit.addEventListener('click', () => {
     openPopup(popup);
     fillingFormPopup();
 });
-//Слушатель для открытия popup__add
+//Слушатель для открытия popup-add
 profileButtonTypeAdd.addEventListener('click', () => {
     openPopup(popupAdd);
 });
