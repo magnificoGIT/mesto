@@ -80,12 +80,10 @@
 
 @import url(../blocks/popup/__button/_type/popup__button_type_save.css);
 
-@import url(../blocks/popup/__container/_type/popup__container_type_image.css);
-
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 
 @import url(../blocks/popup/__image/popup__image.css);
 
 @import url(../blocks/popup/__image-subtitle/popup__image-subtitile.css);
 
-@import url(../blocks/popup/_img/popup_img.css);
+@import url(../blocks/popup/__img/popup__img.css);
