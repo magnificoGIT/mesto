@@ -71,7 +71,7 @@ function savingTextFormPopup() {
 function handleFormSubmit (evt) {
     evt.preventDefault();
     savingTextFormPopup();
-    popupClose(popup);
+    сlosePopup(popup);
 }
 //Функция добавления класса с изображением черной кнопки лайка
 function addBlackLike(event) {
