@@ -1,4 +1,4 @@
-const popup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup-edit');
 const popupButtonClose = document.querySelectorAll('.popup__button_type_close');
 //Переменные секции profile
 const profile = document.querySelector('.profile');
@@ -71,7 +71,7 @@ function savingTextFormPopup() {
 function handleFormSubmit (evt) {
     evt.preventDefault();
     savingTextFormPopup();
-    сlosePopup(popup);
+    сlosePopup(popupEdit);
 }
 //Функция добавления класса с изображением черной кнопки лайка
 function addBlackLike(event) {
@@ -89,6 +89,7 @@ function createCardElements(name, link) {
     
     imageElement.src = link;
     titileElement.textContent = name;
+    imageElement.alt = 'Изображение добавленное пользователем';
 
     elementsButtonHeart.addEventListener('click', addBlackLike);
     buttonDeleteElement.addEventListener('click', () => {
@@ -98,6 +99,7 @@ function createCardElements(name, link) {
         openPopup(popupImg);
         popupImage.src = link;
         imageSubtitle.textContent = name;
+        popupImage.alt = 'Изображение добавленное пользователем';
     });
 
     return cardElement
@@ -138,7 +140,7 @@ popupButtonClose.forEach((button) => {
 });
 //Слушатель на добавление класса popup_active для открытия popup при клике на кнопку редактировать
 profileButtonTypeEdit.addEventListener('click', () => {
-    openPopup(popup);
+    openPopup(popupEdit);
     fillingFormPopup();
 });
 //Слушатель для открытия popup-add
