@@ -6,7 +6,7 @@ const configPopupError = {
     inactiveButtonClass: 'popup__button_type_disabled',
     inputErrorClass: 'popup__input_type_error'
 };
-
+//Функция поиска всех форм и перебирание их
 function enableValidation(configPopupError) {
     const formPopup = document.querySelectorAll(configPopupError.formSelector);
 
@@ -14,7 +14,7 @@ function enableValidation(configPopupError) {
         setEventListener(formElement, configPopupError);
     });
 }
-
+//Функция установки слушателя инпутов
 function setEventListener(formElement, configPopupError) {
     const inputForm = formElement.querySelectorAll(configPopupError.inputSelector);
     const buttonElement = formElement.querySelector(configPopupError.buttonSelector);
@@ -27,23 +27,29 @@ function setEventListener(formElement, configPopupError) {
             checkInputValidity(inputElement, formElement);
         })
     })
-
-    formElement.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-        if (!formElement.checkValidity()) return;
-    })
+        if (!formElement.checkValidity()) {
+            disabledButton(buttonElement);
+        };
 }
-
-function toggleButton(buttonElement, active, configPopupError) {
+//Функция неактивной кнопки
+function disabledButton(buttonElement) {
+    buttonElement.disabled = 'disabled'
+    buttonElement.classList.add(configPopupError.inactiveButtonClass);
+}
+//Функция удаления disabled для активной кнопки
+function enabledButton(buttonElement) {
+    buttonElement.disabled = false;
+    buttonElement.classList.remove(configPopupError.inactiveButtonClass);
+}
+//Функция переключения между неактивного состояния кнопик и активного
+function toggleButton(buttonElement, active) {
     if(!active) {
-        buttonElement.disabled = 'disabled'
-        buttonElement.classList.add(configPopupError.inactiveButtonClass);
+        disabledButton(buttonElement)
     } else {
-        buttonElement.disabled = false;
-        buttonElement.classList.remove(configPopupError.inactiveButtonClass);
+        enabledButton(buttonElement)
     }
 }
-
+//Функция проверки валидности инпутов
 function checkInputValidity(inputElement, formElement) {
     const isInputValid = inputElement.validity.valid;
     const errorMessage = formElement.querySelector(`#${inputElement.name}-error`);
@@ -54,15 +60,15 @@ function checkInputValidity(inputElement, formElement) {
     }
 
 }
-
+//Функция добавления ошибки о невалидности
 function addError(inputElement, errorMessage, configPopupError) {
     inputElement.classList.add(configPopupError.inputErrorClass);
     errorMessage.textContent = inputElement.validationMessage;
 }
-
+//Функция очистки ошибки о невалидности
 function clearAnError(inputElement, errorMessage, configPopupError) {
     inputElement.classList.remove(configPopupError.inputErrorClass);
     errorMessage.textContent = inputElement.validationMessage;
 }
-
+//Вызов функции поиска всех форм
 enableValidation(configPopupError);

@@ -2,6 +2,7 @@ const popupEdit = document.querySelector('.popup-edit');
 const popupButtonClose = document.querySelectorAll('.popup__button_type_close');
 const overlay = document.querySelectorAll('.popup');
 const popupContainer = document.querySelectorAll('.popup__container')
+const buttonTypeSaveEdit = popupEdit.querySelector('.popup__button_type_save-edit')
 //Переменные секции profile
 const profile = document.querySelector('.profile');
 const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit');
@@ -16,48 +17,25 @@ const popupAdd = document.querySelector('.popup-add');
 const popupFormAdd = popupAdd.querySelector('.popup__form_add');
 const popupInputTitle = popupAdd.querySelector('.popup__input_type_title');
 const popupInputUrl = popupAdd.querySelector('.popup__input_type_url');
+const popupButtonCreate = popupAdd.querySelector('.popup__button_type_create');
 //Переменные popup для image
 const popupImg = document.querySelector('.popup-img');
 const popupImage = popupImg.querySelector('.popup__image');
 const imageSubtitle = popupImg.querySelector('.popup__image-subtitle');
-const popupButtonCreate = popupImg.querySelector('.popup__button_type_create');
 //Переменные popup для edit
 const popupFormEdit = document.querySelector('.popup__form-edit')
 const popupInputName = document.querySelector('.popup__input_type_name');
 const popupInputAboutMyself = document.querySelector('.popup__input_type_about-myself');
-//Массив изначальных карточек
-const initialCards = [
-    {
-        name: 'Таганай',
-        link: 'https://plus.unsplash.com/premium_photo-1668260981209-3099c179e668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-    },
-    {
-        name: 'Зеленоград',
-        link: 'https://images.unsplash.com/photo-1536577722576-fcfdbcad17e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1365&q=80',
-    },
-    {
-        name: 'Кучерал',
-        link: 'https://images.unsplash.com/photo-1615128216846-99c52541bf92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    },
-    {
-        name: 'Москва',
-        link: 'https://images.unsplash.com/photo-1536995439819-b47123832cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    },
-    {
-        name: 'Прокопьевск',
-        link: 'https://images.unsplash.com/photo-1516016767233-7efadeb62e74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    },
-    {
-        name: 'Останкино',
-        link: 'https://images.unsplash.com/photo-1526565688145-39300f9b888f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-    },
-];
 //Функции открытия и закрытия popup
 function openPopup(popup) {
     popup.classList.add('popup_active');
+    //Слушатель закрытия popup на кнопку escape
+    document.addEventListener('keydown', closePopupEsc);
 }
 function closePopup(popup) {
     popup.classList.remove('popup_active');
+    //Слушатель закрытия popup на кнопку escape
+    document.addEventListener('keydown', closePopupEsc);
 }
 //Функция заполненых полей при открытии popup
 function fillingFormPopup() {
@@ -69,7 +47,7 @@ function savingTextFormPopup() {
     profileTitle.textContent = popupInputName.value;
     profileSubtitle.textContent = popupInputAboutMyself.value;
 }
-function handleFormSubmit (evt) {
+function handleFormSubmitEdit (evt) {
     evt.preventDefault();
     savingTextFormPopup();
     closePopup(popupEdit);
@@ -90,7 +68,7 @@ function createCardElements(name, link) {
     
     imageElement.src = link;
     titileElement.textContent = name;
-    imageElement.alt = 'Изображение добавленное пользователем';
+    imageElement.alt = titileElement.textContent;
 
     elementsButtonHeart.addEventListener('click', addBlackLike);
     buttonDeleteElement.addEventListener('click', () => {
@@ -100,7 +78,7 @@ function createCardElements(name, link) {
         openPopup(popupImg);
         popupImage.src = link;
         imageSubtitle.textContent = name;
-        popupImage.alt = 'Изображение добавленное пользователем';
+        popupImage.alt = imageSubtitle.textContent;
     });
 
     return cardElement
@@ -110,6 +88,17 @@ function renderCardElements(data, container) {
     const newCard = createCardElements(data.name, data.link);
     container.prepend(newCard);
 }
+//Функция закрытия popup на esc
+function closePopupEsc(evt) {
+    if(evt.key === 'Escape') {
+        overlay.forEach((popup) => {
+            if(popup.classList.contains('popup_active')) {
+                closePopup(popup);
+            };
+        });
+    };
+}
+
 //Поиск и добавление всех name и link у массива
 initialCards.forEach(function(item) {
     renderCardElements(item, elementsContainer);
@@ -126,35 +115,22 @@ overlay.forEach((popup) => {
          evt.stopPropagation();
        });
    })
-//Закрытие popup на кнопку escape
-document.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-        overlay.forEach((popup) => {
-            if(popup.classList.contains('popup_active')) {
-                closePopup(popup);
-            };
-        });
-    };
-})
 //Событие формы создания карточки
 popupFormAdd.addEventListener('submit', function(evt) {
     evt.preventDefault();
-    if (popupInputTitle.value === '' || popupInputUrl.value === '') {
-        closePopup(popupAdd);
-
-        return
-    }
     const newDataCard = {
         name: popupInputTitle.value,
         link: popupInputUrl.value
     }
+
     renderCardElements(newDataCard, elementsContainer);
     closePopup(popupAdd);
     popupInputTitle.value = '';
     popupInputUrl.value = '';
+    disabledButton(popupButtonCreate);
 });
 //Слушатель сохранения редактируемого текста и закрытия popup на кнопку "Сохранить" или клавишу Enter
-popupFormEdit.addEventListener('submit', handleFormSubmit);
+popupFormEdit.addEventListener('submit', handleFormSubmitEdit);
 //Слушатель на удаление класса popup_active для закрытия popup
 popupButtonClose.forEach((button) => {
     button.addEventListener('click', function() {
@@ -165,6 +141,7 @@ popupButtonClose.forEach((button) => {
 profileButtonTypeEdit.addEventListener('click', () => {
     openPopup(popupEdit);
     fillingFormPopup();
+    enabledButton(buttonTypeSaveEdit);
 });
 //Слушатель для открытия popup-add
 profileButtonTypeAdd.addEventListener('click', () => {

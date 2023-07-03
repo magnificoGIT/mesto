@@ -3,11 +3,6 @@
     flex-direction: column;
     z-index: 3;
     opacity: 1;
-    max-width: 430px;
-}
-
-@media screen and (max-width: 650px) {
-    .popup__container {
-        max-width: 282px;
-    }
+    max-width: 75vw;
+    max-height: 75vh;
 }
