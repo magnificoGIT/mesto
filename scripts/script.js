@@ -1,8 +1,11 @@
 const popupEdit = document.querySelector('.popup-edit');
 const popupButtonClose = document.querySelectorAll('.popup__button_type_close');
 const overlay = document.querySelectorAll('.popup');
-const popupContainer = document.querySelectorAll('.popup__container')
-const buttonTypeSaveEdit = popupEdit.querySelector('.popup__button_type_save-edit')
+const popupContainer = document.querySelectorAll('.popup__container');
+const buttonTypeSaveEdit = popupEdit.querySelector('.popup__button_type_save-edit');
+const configInactiveButton = {
+    inactiveButtonClass: 'popup__button_type_disabled',
+};
 //Переменные секции profile
 const profile = document.querySelector('.profile');
 const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit');
@@ -127,7 +130,7 @@ popupFormAdd.addEventListener('submit', function(evt) {
     closePopup(popupAdd);
     popupInputTitle.value = '';
     popupInputUrl.value = '';
-    disabledButton(popupButtonCreate);
+    disabledButton(popupButtonCreate, configInactiveButton);
 });
 //Слушатель сохранения редактируемого текста и закрытия popup на кнопку "Сохранить" или клавишу Enter
 popupFormEdit.addEventListener('submit', handleFormSubmitEdit);
@@ -141,7 +144,7 @@ popupButtonClose.forEach((button) => {
 profileButtonTypeEdit.addEventListener('click', () => {
     openPopup(popupEdit);
     fillingFormPopup();
-    enabledButton(buttonTypeSaveEdit);
+    enabledButton(buttonTypeSaveEdit, configInactiveButton);
 });
 //Слушатель для открытия popup-add
 profileButtonTypeAdd.addEventListener('click', () => {

@@ -1,11 +1,3 @@
-const configPopupError = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    buttonSelector: '.popup__button_type_save',
-    inactiveButtonClass: 'popup__button_type_disabled',
-    inputErrorClass: 'popup__input_type_error'
-};
 //Функция поиска всех форм и перебирание их
 function enableValidation(configPopupError) {
     const formPopup = document.querySelectorAll(configPopupError.formSelector);
@@ -24,33 +16,30 @@ function setEventListener(formElement, configPopupError) {
     [...inputForm].forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             toggleButton(buttonElement, formElement.checkValidity(), configPopupError);
-            checkInputValidity(inputElement, formElement);
+            checkInputValidity(inputElement, formElement, configPopupError);
         })
     })
-        if (!formElement.checkValidity()) {
-            disabledButton(buttonElement);
-        };
 }
 //Функция неактивной кнопки
-function disabledButton(buttonElement) {
+function disabledButton(buttonElement, configPopupError) {
     buttonElement.disabled = 'disabled'
     buttonElement.classList.add(configPopupError.inactiveButtonClass);
 }
 //Функция удаления disabled для активной кнопки
-function enabledButton(buttonElement) {
+function enabledButton(buttonElement, configPopupError) {
     buttonElement.disabled = false;
     buttonElement.classList.remove(configPopupError.inactiveButtonClass);
 }
 //Функция переключения между неактивного состояния кнопик и активного
-function toggleButton(buttonElement, active) {
+function toggleButton(buttonElement, active, configPopupError) {
     if(!active) {
-        disabledButton(buttonElement)
+        disabledButton(buttonElement, configPopupError)
     } else {
-        enabledButton(buttonElement)
+        enabledButton(buttonElement, configPopupError)
     }
 }
 //Функция проверки валидности инпутов
-function checkInputValidity(inputElement, formElement) {
+function checkInputValidity(inputElement, formElement, configPopupError) {
     const isInputValid = inputElement.validity.valid;
     const errorMessage = formElement.querySelector(`#${inputElement.name}-error`);
     if(!isInputValid) {
@@ -71,4 +60,11 @@ function clearAnError(inputElement, errorMessage, configPopupError) {
     errorMessage.textContent = inputElement.validationMessage;
 }
 //Вызов функции поиска всех форм
-enableValidation(configPopupError);
+enableValidation({
+    formSelector: '.popup__form', 
+    inputSelector: '.popup__input', 
+    submitButtonSelector: '.popup__button', 
+    buttonSelector: '.popup__button_type_save', 
+    inactiveButtonClass: 'popup__button_type_disabled', 
+    inputErrorClass: 'popup__input_type_error',
+  });
