@@ -25,3 +25,13 @@ export const initialCards = [
         link: 'https://images.unsplash.com/photo-1526565688145-39300f9b888f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
     },
 ];
+
+// Конфигурация формы для валидации
+export const formEditValidatorConfig = {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__input',
+        submitButtonSelector: '.popup__button',
+        buttonSelector: '.popup__button_type_save',
+        inactiveButtonClass: 'popup__button_type_disabled',
+        inputErrorClass: 'popup__input_type_error'
+    }

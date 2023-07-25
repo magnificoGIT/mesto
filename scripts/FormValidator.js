@@ -8,28 +8,28 @@ export class FormValidator {
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
     this._inputElements = Array.from(this._validatorElement.querySelectorAll(this._inputSelector));
+    this._buttonElement = this._validatorElement.querySelector(this._buttonSelector);
     }
 
 //Метод для установки неактивной кнопки при неправильной валидации
-    disabledButton(buttonElement) {
-        buttonElement.disabled = true;
-        buttonElement.classList.add(this._inactiveButtonClass)
+    disabledButton() {
+        this._buttonElement.disabled = true;
+        this._buttonElement.classList.add(this._inactiveButtonClass)
     }
 
 //Метод для установки активной кнопки при правильной валидации
-    enabledButton(buttonElement) {
-        buttonElement.disabled = false;
-        buttonElement.classList.remove(this._inactiveButtonClass)
+    enabledButton() {
+        this._buttonElement.disabled = false;
+        this._buttonElement.classList.remove(this._inactiveButtonClass)
     }
 
 //Метод переключения между неактивного состояния кнопки и активной
     _toggleButton() {
-        const buttonElement = this._validatorElement.querySelector(this._buttonSelector);
         const isValid = this._validatorElement.checkValidity();
         if(!isValid) {
-            this.disabledButton(buttonElement);
+            this.disabledButton();
         } else {
-            this.enabledButton(buttonElement);
+            this.enabledButton();
         }
 }
 
@@ -60,8 +60,7 @@ _checkInputValidity(inputElement) {
 //Метод установки слушателей для валидации инпутов
 _setEventListenerValidator() {
     this._inputElements.forEach((inputElement) => {
-        this._validatorElement.addEventListener('input', (evt) => {
-            evt.preventDefault();
+        this._validatorElement.addEventListener('input', () => {
             this._checkInputValidity(inputElement);
             this._toggleButton();
         });

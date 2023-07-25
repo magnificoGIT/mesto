@@ -1,18 +1,16 @@
-import { FormValidator } from "./FormValidator.js";
-import { initialCards } from "./constants.js";
+import { initialCards, formEditValidatorConfig } from "./constants.js";
 import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
 
 const popupEdit = document.querySelector('.popup-edit');
 const popupButtonClose = document.querySelectorAll('.popup__button_type_close');
 const overlays = document.querySelectorAll('.popup');
-const buttonTypeSaveEdit = popupEdit.querySelector('.popup__button_type_save-edit');
 //Переменные секции profile
 const profile = document.querySelector('.profile');
 const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit');
 const profileButtonTypeAdd = profile.querySelector('.profile__button_type_add');
 const profileTitle = profile.querySelector('.profile__title');
 const profileSubtitle = profile.querySelector('.profile__subtitle');
-//Переменные template для секции element
 // const templateElement = document.querySelector('#element-templat-card').content.querySelector('.elements__card');
 const elementsContainer = document.querySelector('.elements');
 //Переменные popup для add
@@ -20,31 +18,13 @@ const popupAdd = document.querySelector('.popup-add');
 const popupFormAdd = popupAdd.querySelector('.popup__form_add');
 const popupInputTitle = popupAdd.querySelector('.popup__input_type_title');
 const popupInputUrl = popupAdd.querySelector('.popup__input_type_url');
-const popupButtonCreate = popupAdd.querySelector('.popup__button_type_create');
 //Переменные popup для edit
 const popupFormEdit = document.querySelector('.popup__form-edit')
 const popupInputName = document.querySelector('.popup__input_type_name');
 const popupInputAboutMyself = document.querySelector('.popup__input_type_about-myself');
-
-//Применить класс FormValidator для валидации полей формы редактирования
-const popupFormEditValidator = new FormValidator({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    buttonSelector: '.popup__button_type_save-edit',
-    inactiveButtonClass: 'popup__button_type_disabled',
-    inputErrorClass: 'popup__input_type_error',
-}, popupFormEdit);
-
-//Применить класс FormValidator для валидации полей формы добавления карточки
-const popupFormAddValidator = new FormValidator({
-formSelector: '.popup__form',
-inputSelector: '.popup__input',
-submitButtonSelector: '.popup__button',
-buttonSelector: '.popup__button_type_create',
-inactiveButtonClass: 'popup__button_type_disabled',
-inputErrorClass: 'popup__input_type_error',
-}, popupFormAdd);
+// Переменные создания новых экземпляров валидации для форм редактирования и добавления карточки
+const popupFormEditValidator = new FormValidator(formEditValidatorConfig, popupFormEdit);
+const popupFormAddValidator = new FormValidator(formEditValidatorConfig, popupFormAdd);
 
 //Функции открытия и закрытия popup
 function openPopup(popup) {
@@ -125,7 +105,7 @@ popupFormAdd.addEventListener('submit', function(evt) {
     }
     renderCard(newDataCard);
     closePopup(popupAdd);
-    popupFormAddValidator.disabledButton(popupButtonCreate); // Применение публичного метода FormValidator для деактивации кнопки после добавления новой карточки
+    popupFormAddValidator.disabledButton(); // Применение публичного метода FormValidator для деактивации кнопки после добавления новой карточки
     popupFormAdd.reset();
 });
 
@@ -143,7 +123,7 @@ popupButtonClose.forEach((button) => {
 profileButtonTypeEdit.addEventListener('click', () => {
     openPopup(popupEdit);
     fillingFormPopup();
-    popupFormEditValidator.enabledButton(buttonTypeSaveEdit); // Применение публичного метода FormValidator для активации кнопки при открытии формы
+    popupFormEditValidator.enabledButton(); // Применение публичного метода FormValidator для активации кнопки при открытии формы
 });
 
 //Слушатель для открытия popup-add
@@ -151,8 +131,8 @@ profileButtonTypeAdd.addEventListener('click', () => {
     openPopup(popupAdd);
 });
 
-renderInitialCards();
-
 popupFormEditValidator.enableValidation();
 
 popupFormAddValidator.enableValidation();
+
+renderInitialCards();
