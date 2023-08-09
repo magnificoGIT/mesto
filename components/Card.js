@@ -1,12 +1,12 @@
-export class Card {
-    constructor(data, templateSelector, handleOpenPopup) {
+export default class Card {
+    constructor(data, templateSelector, handleCardClick) {
         this._name = data.name; // Присвоить свойству _name значение имени карточки из переданных данных
         this._link = data.link; // Присвоить свойству _link значение ссылки на изображение из переданных данных
         this._templateSelector = templateSelector; // Присвоить свойству _templateSelector значение селектора шаблона карточки из переданных данных
         this._element = this._getTemplate(); //Инициализировать элемент в конструкторе для взаимодействия методов класса с DOM-элементами
         this._imageElement = this._element.querySelector('.elements__image');
         this._titileElement = this._element.querySelector('.elements__title');
-        this._handleOpenPopup = handleOpenPopup; // Получить свойство handleOpenPopup
+        this._handleCardClick = handleCardClick; // Получить свойство handleOpenPopup
     }
     
     //Метод клонирования разметки карточки
@@ -29,7 +29,8 @@ export class Card {
             this._toggleLike()}); // Слушатель добавления черного лайка
 
             this._imageElement.addEventListener('click', () => {
-            this._handleImageCard()}); // Слушатель отображения изображения по клику на картинку в карточке
+                this._handleCardClick({ name: this._name, link: this._link }); // Вызываем функцию открытия попапа с картинкой, передав имя и ссылку на изображение
+            });
     }
 
     //Метод добавления черного лайка
@@ -42,11 +43,6 @@ export class Card {
     //Метод удаления карточки из DOM
     _handleDeleteCard() {
         this._element.remove(); // Удалить карточку из DOM
-    }
-
-    //Метод для отображения изображения по клику на карточку
-    _handleImageCard() {
-        this._handleOpenPopup(this._name, this._link);
     }
 
     generateCard() {

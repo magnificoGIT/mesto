@@ -1,3 +1,17 @@
+//Переменные секции profile
+export const profile = document.querySelector('.profile');
+export const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit');
+export const profileButtonTypeAdd = profile.querySelector('.profile__button_type_add');
+// const templateElement = document.querySelector('#element-templat-card').content.querySelector('.elements__card');
+export const elementsContainer = document.querySelector('.elements');
+//Переменные popup для add
+export const popupAdd = document.querySelector('.popup-add');
+export const popupFormAdd = popupAdd.querySelector('.popup__form_add');
+//Переменные popup для edit
+export const popupFormEdit = document.querySelector('.popup__form-edit')
+export const popupInputName = popupFormEdit.querySelector('.popup__input_type_name');
+export const popupInputAboutMyself = popupFormEdit.querySelector('.popup__input_type_about-myself');
+
 //Массив изначальных карточек
 export const initialCards = [
     {

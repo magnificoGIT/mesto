@@ -1,14 +1,14 @@
-export class FormValidator {
+export default class FormValidator {
     constructor(config, validatorElement) {
-    this._validatorElement = validatorElement;
-    this._formSelector = config.formSelector;
+    this._validatorElement = validatorElement; // Сохраняем элемент валидируемой формы
+    this._formSelector = config.formSelector; // Сохраняем селекторы из объекта конфигурации
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
     this._buttonSelector = config.buttonSelector;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._inputErrorClass = config.inputErrorClass;
-    this._inputElements = Array.from(this._validatorElement.querySelectorAll(this._inputSelector));
-    this._buttonElement = this._validatorElement.querySelector(this._buttonSelector);
+    this._inputElements = Array.from(this._validatorElement.querySelectorAll(this._inputSelector)); // Находим все поля ввода внутри формы
+    this._buttonElement = this._validatorElement.querySelector(this._buttonSelector); // Находим кнопку отправки формы
     }
 
 //Метод для установки неактивной кнопки при неправильной валидации
