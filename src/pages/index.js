@@ -1,3 +1,5 @@
+import './index.css';
+
 import { initialCards, formEditValidatorConfig,
     profileButtonTypeEdit, profileButtonTypeAdd, 
     elementsContainer, popupFormAdd,
