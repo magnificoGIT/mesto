@@ -94,7 +94,7 @@ profileButtonTypeAdd.addEventListener('click', () => {
 popupFormEditValidator.enableValidation();
 popupFormAddValidator.enableValidation();
  
-// Установка обработчиков событий на попапы
+// Установка обработчиков событий для закрытия поапов по оверлею и кнопке закрытия
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
 imagePopup.setEventListeners();

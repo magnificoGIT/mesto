@@ -40,9 +40,7 @@ export const initialCards = [
 
 // Конфигурация формы для валидации
 export const formEditValidatorConfig = {
-        formSelector: '.popup__form',
         inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__button',
         buttonSelector: '.popup__button_type_save',
         inactiveButtonClass: 'popup__button_type_disabled',
         inputErrorClass: 'popup__input_type_error'
