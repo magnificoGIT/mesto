@@ -2,20 +2,29 @@ import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, submitCallback) {
-        super(popupSelector); // Вызов конструктора базового класса с передачей селектора попапа
-        this._submitCallback = submitCallback; // Сохранение функции-коллбэка для сабмита формы
-        this._popupForm = this._popup.querySelector('.popup__form'); // Находим форму внутри попапа
-        this._popupFormInput = this._popupForm.querySelectorAll('.popup__input'); // Находим все поля ввода внутри формы
+        // Вызов конструктора родительского класса с передачей селектора попапа
+        super(popupSelector);
+        // Сохранение функции-коллбэка для сабмита формы
+        this._submitCallback = submitCallback;
+        // Находим форму внутри попапа
+        this._popupForm = this._popup.querySelector('.popup__form');
+        // Находим все поля ввода внутри формы
+        this._inputList = this._popupForm.querySelectorAll('.popup__input');
     }
 
     // Приватный метод для получения значений полей ввода формы
     _getInputValues() {
-        const values = {}; // Объект для хранения значений полей формы
-        this._popupFormInput.forEach(input => {
-            // Проходим по всем полям ввода формы
-            values[input.name] = input.value; // Добавляем значение поля в объект по его имени
+        // Объект для хранения значений полей формы
+        const values = {};
+        
+        // Проходим по всем полям ввода формы
+        this._inputList.forEach(input => {
+            // Добавляем значение поля в объект по его имени
+            values[input.name] = input.value;
         });
-        return values; // Возвращаем объект с значениями полей формы
+
+        // Возвращаем объект с значениями полей формы
+        return values;
     }
 
     setEventListeners() {
@@ -27,13 +36,13 @@ export default class PopupWithForm extends Popup {
             evt.preventDefault();
             // Вызываем функцию-коллбэк с передачей значений полей формы
             this._submitCallback(this._getInputValues());
-            // Закрываем попап после отправки формы
-            this.closePopup();
         })
     }
 
     closePopup() {
-        super.closePopup(); // Вызываем метод закрытия попапа родителя класса
-        this._popupForm.reset(); // Сбрасываем значения полей формы
+        // Вызываем метод закрытия попапа родителя класса
+        super.closePopup();
+        // Сбрасываем значения полей формы
+        this._popupForm.reset();
     }
 }

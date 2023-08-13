@@ -1,18 +1,25 @@
 export default class Popup {
     constructor(popupSelector) {
-        this._popup = document.querySelector(popupSelector); // Находим элемент попапа по селектору
-        this._handleEscClose = this._handleEscClose.bind(this); // Привязываем контекст для обработчика клавиши Esc
-        this._popupButtonClose = this._popup.querySelector('.popup__button_type_close'); // Находим кнопку закрытия попапа
+        // Находим элемент попапа по селектору
+        this._popup = document.querySelector(popupSelector);
+        // Привязываем контекст для обработчика клавиши Esc
+        this._handleEscClose = this._handleEscClose.bind(this);
+        // Находим кнопку закрытия попапа
+        this._popupButtonClose = this._popup.querySelector('.popup__button_type_close');
     }
 
     openPopup() {
-        this._popup.classList.add('popup_active'); // Добавляем класс, делающий попап видимым
-        document.addEventListener('keydown', this._handleEscClose); // Добавляем обработчик для закрытия попапа по клавише Esc
+        // Добавляем класс, делающий попап видимым
+        this._popup.classList.add('popup_active');
+        // Добавляем обработчик для закрытия попапа по клавише Esc
+        document.addEventListener('keydown', this._handleEscClose);
     }
 
     closePopup() {
-        this._popup.classList.remove('popup_active');// Удаляем класс, отвечающий за видимость попапа
-        document.removeEventListener('keydown', this._handleEscClose); // Удаляем обработчик клавиши Esc
+        // Удаляем класс, отвечающий за видимость попапа
+        this._popup.classList.remove('popup_active');
+        // Удаляем обработчик клавиши Esc
+        document.removeEventListener('keydown', this._handleEscClose);
     }
 
     // Приватный метод для обработки события клавиши Esc
@@ -23,7 +30,8 @@ export default class Popup {
     }
 
     setEventListeners() {
-        this._popupButtonClose.addEventListener('click', this.closePopup.bind(this)); // Обработчик клика по кнопке закрытия попапа
+        // Обработчик клика по кнопке закрытия попапа
+        this._popupButtonClose.addEventListener('click', this.closePopup.bind(this));
         
         // Обработчик клика по оверлею попапа для закрытия
         this._popup.addEventListener('click', (evt) => {
@@ -31,6 +39,5 @@ export default class Popup {
                 this.closePopup();
             }
         });
-        document.addEventListener('keydown', this._handleEscClose); // Обработчик для закрытия попапа по клавише Esc
     }
 }

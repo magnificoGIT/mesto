@@ -2,8 +2,6 @@
 export const profile = document.querySelector('.profile');
 export const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit');
 export const profileButtonTypeAdd = profile.querySelector('.profile__button_type_add');
-// const templateElement = document.querySelector('#element-templat-card').content.querySelector('.elements__card');
-export const elementsContainer = document.querySelector('.elements');
 //Переменные popup для add
 export const popupAdd = document.querySelector('.popup-add');
 export const popupFormAdd = popupAdd.querySelector('.popup__form_add');
@@ -48,4 +46,4 @@ export const formEditValidatorConfig = {
         buttonSelector: '.popup__button_type_save',
         inactiveButtonClass: 'popup__button_type_disabled',
         inputErrorClass: 'popup__input_type_error'
-    }
+};
