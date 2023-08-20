@@ -1,6 +1,6 @@
 //Переменные секции profile
 export const profile = document.querySelector('.profile');
-export const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit');
+export const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit-info');
 export const profileButtonTypeAdd = profile.querySelector('.profile__button_type_add');
 //Переменные popup для add
 export const popupAdd = document.querySelector('.popup-add');

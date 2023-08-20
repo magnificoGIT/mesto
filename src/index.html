@@ -14,11 +14,16 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Круглое изображение, в фокусе которого находится улыбающийся Жак-Ив Кусто в красной шапке" class="profile__avatar">
+            <div class="profile__avatar-container">
+                <img src="<%=require('./images/profile__avatar.jpg')%>" alt="Круглое изображение, в фокусе которого находится улыбающийся Жак-Ив Кусто в красной шапке" class="profile__avatar">
+                <button type="button" class="profile__button profile__button_type_edit profile__button_type_edit-avatar" aria-label="edit-avatar">
+                    <img src="<%=require('./images/Vector.svg')%>" alt="Иконка кнопки в виде карандаша" class="profile__button-icon profile__button-icon_type_edit-avatar">
+                </button>
+            </div>
             <div class="profile__info">
                 <div class="profile__container">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button type="button" class="profile__button profile__button_type_edit" aria-label="edit">
+                    <button type="button" class="profile__button profile__button_type_edit profile__button_type_edit-info" aria-label="edit">
                         <img src="<%=require('./images/Vector.svg')%>" alt="Иконка кнопки в виде карандаша" class="profile__button-icon profile__button-icon_type_edit">
                     </button>
                 </div>
@@ -42,7 +47,9 @@
                         <span id="name-error" class="popup__input-error "></span>
                         <input type="text" name="about" class="popup__input popup__input_type_about-myself" minlength="2" maxlength="200" required>
                         <span id="about-error" class="popup__input-error"></span>
-                        <button type="submit" class="popup__button popup__button_type_save popup__button_type_save-edit">Сохранить</button>
+                        <button type="submit" class="popup__button popup__button_type_save popup__button_type_save-edit">
+                            Сохранить
+                        </button>
                     </form>
                 </div>
             </div>
@@ -57,9 +64,11 @@
                     <form class="popup__form popup__form_add" name="popup-form-add" autocomplete="on" novalidate>
                         <input type="text" name="title" class="popup__input popup__input_type_title" placeholder="Название" minlength="2" maxlength="30" required>
                         <span id="title-error" class="popup__input-error"></span>
-                        <input type="url" name="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required >
+                        <input type="url" name="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required>
                         <span id="url-error" class="popup__input-error"></span>
-                        <button type="submit" class="popup__button popup__button_type_save popup__button_type_create">Создать</button>
+                        <button type="submit" class="popup__button popup__button_type_save popup__button_type_create">
+                            Создать
+                        </button>
                     </form>
                 </div>
             </div>
@@ -75,6 +84,36 @@
                         <h2 class="popup__image-subtitle"></h2>
                     </figcaption>
                 </figure>
+            </div>
+        </div>
+        <div class="popup popup-confirm-delete-avatar">
+            <div class="popup__container">
+                <button type="button" class="popup__button popup__button_type_close" aria-label="close">
+                    <img src="<%=require('./images/popup__button-icon_close.svg')%>" alt="Иконка кнопки в виде крестика" class="popup__button-icon popup__button-icon_type_close">
+                </button>
+                <div class="popup__container-form">
+                    <h2 class="popup__title popup__title-confirm">Вы уверены?</h2>
+                    <button type="submit" class="popup__button popup__button_type_save popup__button_type_confirm-delete">
+                        Да
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="popup popup-update-avatar">
+            <div class="popup__container">
+                <button type="button" class="popup__button popup__button_type_close" aria-label="close">
+                    <img src="<%=require('./images/popup__button-icon_close.svg')%>" alt="Иконка кнопки в виде крестика" class="popup__button-icon popup__button-icon_type_close">
+                </button>
+                <div class="popup__container-form">
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <form class="popup__form popup__form_type_update" name="popup-form-confirm" autocomplete="on" novalidate>
+                        <input type="url" name="url-avatar" class="popup__input popup__input_type_url-avatar" placeholder="Ссылка на изображение" required>
+                        <span id="url-avatar-error" class="popup__input-error"></span>
+                        <button type="submit" class="popup__button popup__button_type_save popup__button_type_update">
+                            Сохранить
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
@@ -95,6 +134,7 @@
                 <h2 class="elements__title"></h2>
                 <button type="button" class="elements__button elements__button_type_heart" aria-label="heart">
                     <img src="<%=require('./images/heart.svg')%>" alt="Иконка кнопки в виде сердца" class="elements__button-icon elements__button-icon_type_heart">
+                    <p class="elements__likes-count"></p>
                 </button>
             </div>
         </article>

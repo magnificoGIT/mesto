@@ -13,7 +13,7 @@ module.exports = (env) => {
       filename: production
         ? "scripts/[name].[contenthash].js"
         : "scripts/[name].js",
-      publicPath: '',
+      // publicPath: '/mesto/',
     },
     mode: "development",
     devServer: {
