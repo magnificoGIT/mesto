@@ -111,3 +111,5 @@
 @import url(../blocks/popup/__form/_type/popup__form_type_update.css);
 
 @import url(../blocks/popup/__input/_type/popup__input_type_url-avatar.css);
+
+@import url(../blocks/popup/__form/_type/popup__form_type_confirm.css);

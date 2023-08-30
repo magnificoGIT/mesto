@@ -1,42 +1,22 @@
 //Переменные секции profile
 export const profile = document.querySelector('.profile');
+export const profileTitle = profile.querySelector('.profile__title');
+export const profileSubtitle = profile.querySelector('.profile__subtitle');
 export const profileButtonTypeEdit = profile.querySelector('.profile__button_type_edit-info');
 export const profileButtonTypeAdd = profile.querySelector('.profile__button_type_add');
+export const profileButtonTypeEditAvatar = profile.querySelector('.profile__button_type_edit-avatar')
 //Переменные popup для add
 export const popupAdd = document.querySelector('.popup-add');
 export const popupFormAdd = popupAdd.querySelector('.popup__form_add');
+export const popupButtonAdd = popupAdd.querySelector('.popup__button_type_create')
 //Переменные popup для edit
 export const popupFormEdit = document.querySelector('.popup__form-edit')
 export const popupInputName = popupFormEdit.querySelector('.popup__input_type_name');
 export const popupInputAboutMyself = popupFormEdit.querySelector('.popup__input_type_about-myself');
-
-//Массив изначальных карточек
-export const initialCards = [
-    {
-        name: 'Таганай',
-        link: 'https://plus.unsplash.com/premium_photo-1668260981209-3099c179e668?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-    },
-    {
-        name: 'Зеленоград',
-        link: 'https://images.unsplash.com/photo-1536577722576-fcfdbcad17e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1365&q=80',
-    },
-    {
-        name: 'Кучерал',
-        link: 'https://images.unsplash.com/photo-1615128216846-99c52541bf92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    },
-    {
-        name: 'Москва',
-        link: 'https://images.unsplash.com/photo-1536995439819-b47123832cdc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    },
-    {
-        name: 'Прокопьевск',
-        link: 'https://images.unsplash.com/photo-1516016767233-7efadeb62e74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-    },
-    {
-        name: 'Останкино',
-        link: 'https://images.unsplash.com/photo-1526565688145-39300f9b888f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-    },
-];
+export const popupFormUpdateAvatar = document.querySelector('.popup__form_type_update');
+export const popupConfirmDeletionCard = document.querySelector('.popup__button_type_confirm-delete');
+export const popupButtonTypeSaveEdit = popupFormEdit.querySelector('.popup__button_type_save-edit');
+export const popupButtonTypeUpdate = popupFormUpdateAvatar.querySelector('.popup__button_type_update');
 
 // Конфигурация формы для валидации
 export const formEditValidatorConfig = {
@@ -44,4 +24,13 @@ export const formEditValidatorConfig = {
         buttonSelector: '.popup__button_type_save',
         inactiveButtonClass: 'popup__button_type_disabled',
         inputErrorClass: 'popup__input_type_error'
-};
+}
+
+// Конфигурационные параметры для взаимодействия с сервером через API.
+export const optionsApi = {
+    url: 'https://mesto.nomoreparties.co/v1/cohort-73',
+    headers: {
+        "content-type": "application/json",
+        authorization: '7e3981d8-4b67-49f2-be2f-d6712d3ec9f5'
+    }
+}
