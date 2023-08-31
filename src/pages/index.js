@@ -98,8 +98,6 @@ const popupAddCard = new PopupWithForm(constants.popupButtonAdd, '.popup-add', (
             renderAndAddCard(dataFromServer);
             popupFormAddValidator.disableButton();
         })
-        .then(() => {
-        })
         .catch((err) => {
             console.error(`Ошибка добавления карточки: ${err}`);
         })
