@@ -39,68 +39,79 @@ const popupFormAddValidator = new FormValidator(constants.formEditValidatorConfi
 const popupFormUpdate = new FormValidator(constants.formEditValidatorConfig, constants.popupFormUpdateAvatar);
 
 // Создание экземпляра класса PopupWithForm для обновления аватара
-const popupUpdateAvatar = new PopupWithForm(constants.popupButtonTypeUpdate, '.popup-update-avatar', () => {
-    popupUpdateAvatar.textPreservation();
-    const formData = popupUpdateAvatar.getInputValues();
+const popupUpdateAvatar = new PopupWithForm(constants.popupButtonTypeUpdate, '.popup-update-avatar', (formData) => {
+    popupUpdateAvatar.renderLoading(true, 'Сохранение...', 'Сохранить');
     // Обновление аватара пользователя на сервере
-    api.updateAvatar(formData)
-        .then((data) => {
-            // Обновление данных о пользователе на странице
-            userInfo.setUserInfo({ name: data.name, about: data.about, avatar: data.avatar });
-            popupUpdateAvatar.closePopup();
+    return api.updateAvatar(formData)
+        .then((userData) => {
+            updatingUserData(userData);
         })
         .catch((err) => {
             console.error(`Ошибка при обновлении изображения: ${err}`);
-        });
+        })
+        .finally(() => {
+            popupUpdateAvatar.renderLoading(false, 'Сохранение...', 'Сохранить')
+        })
 });
 
 // Создание экземпляра PopupWithForm для редактирования профиля
-const popupEditProfile = new PopupWithForm(constants.popupButtonTypeSaveEdit, '.popup-edit', (data) => {
-    popupEditProfile.textPreservation();
+const popupEditProfile = new PopupWithForm(constants.popupButtonTypeSaveEdit, '.popup-edit', (formData) => {
+    popupEditProfile.renderLoading(true, 'Сохранение...', 'Сохранить');
     // Сохранение редактируемых данных на сервер
-    api.updateUserInfo(data)
-        .then((dataFromServer) => {
-            // Обновление данных о пользователе на странице
-            userInfo.setUserInfo({ name: dataFromServer.name, about: dataFromServer.about, avatar: dataFromServer.avatar });
-            popupEditProfile.closePopup();
+    return api.updateUserInfo(formData)
+        .then((userData) => {
+            updatingUserData(userData);
         })
         .catch((err) => {
             console.error(`Ошибка сервера ${err}`);
-        });
+        })
+        .finally(() => {
+            popupEditProfile.renderLoading(false, 'Сохранение...', 'Сохранить')
+        })
 });
 
 // Создание экземпляра PopupWithConfirmation для подтверждения удаления карточки
-const popupConfirmDelete = new PopupWithConfirmation('.popup-confirm-delete-card', (data) => {
+const popupConfirmDelete = new PopupWithConfirmation(constants.popupConfirmDeletionCard, '.popup-confirm-delete-card', (data) => {
     handleDeleteCard(data)
 });
 
 // Загрузка информации о пользователе и изначальных карточек с сервера
 api.getAllInfo()
-    .then(([userData, postAll]) => {
+    .then(([userData, cards]) => {
         // Обновление данных о пользователе на странице
-        userInfo.setUserInfo({ name: userData.name, about: userData.about, avatar: userData.avatar });
+        updatingUserData(userData);
         // Сохранение ID текущего пользователя
         userId = userData._id
         // Отображение карточек на странице
-        cardsSection.renderItems(postAll.reverse())
+        cardsSection.renderItems(cards.reverse())
+    })
+    .catch((err) => {
+        console.error(`Ошибка при загрузке данных: ${err}`);
     });
 
 // Создание экземпляра PopupWithForm для добавления новой карточки
 const popupAddCard = new PopupWithForm(constants.popupButtonAdd, '.popup-add', (data) => {
-    popupAddCard.textCreation()
-    api.addNewCard(data)
+    popupAddCard.renderLoading(true, 'Создание...', 'Cоздать')
+    return api.addNewCard(data)
         .then((dataFromServer) => {
             // Создание и добавление новой карточки на страницу
             renderAndAddCard(dataFromServer);
             popupFormAddValidator.disableButton();
-            popupAddCard.closePopup();
         })
         .then(() => {
         })
         .catch((err) => {
             console.error(`Ошибка добавления карточки: ${err}`);
-        });
+        })
+        .finally(() => {
+            popupAddCard.renderLoading(false, 'Создание...', 'Cоздать')
+        })
 });
+
+// Функция обновление данных пользователя на странице
+function updatingUserData(data) {
+    userInfo.setUserInfo({ name: data.name, about: data.about, avatar: data.avatar });
+}
 
 // Функция для создания карточки
 function createCard(data) {
@@ -124,9 +135,8 @@ function renderAndAddCard(data) {
 function handleDeleteCard(instanceCard) {
     // Открытие попапа подтверждения удаления
     popupConfirmDelete.openPopup();
-    popupConfirmDelete.textConfirmation();
     popupConfirmDelete.setDeleteCardCallback(() => {
-        popupConfirmDelete.textDeletion();
+        popupConfirmDelete.renderLoading(true, 'Удаление...', 'Да');
         // Удаление карточки с сервера
         api.deleteCard(instanceCard.getId())
             .then(() => {
@@ -136,7 +146,10 @@ function handleDeleteCard(instanceCard) {
             })
             .catch((err) => {
                 console.error(`Ошибка удаления карточки с сервера: ${err}`);
-            });
+            })
+            .finally(() => {
+                popupConfirmDelete.renderLoading(false, 'Удаление...', 'Да');
+            })
     });
 }
 
@@ -147,6 +160,9 @@ function handleLikeCard(instance) {
         .then((dataCard) => {
             // Обновление данных о лайках на карточке
             instance.setsLikesData(dataCard);
+        })
+        .catch((err) => {
+            console.error(`Ошибка при постановке/снятии лайка: ${err}`);
         });
 }
 
@@ -162,10 +178,8 @@ function handleEditProfileClick() {
     api.getsUserInfo()
         .then((userData) => {
             // Установка значений полей формы редактирования профиля
-            constants.popupInputName.value = userData.name;
-            constants.popupInputAboutMyself.value = userData.about;
+            popupEditProfile.setInputValues(userData);
             popupEditProfile.openPopup();
-            popupEditProfile.textSave();
             // Применение публичного метода FormValidator для активации кнопки при открытии формы
             popupFormEditValidator.enableButton();
         })
@@ -177,7 +191,6 @@ function handleEditProfileClick() {
 // Слушатель для открытия попапа добавления карточки
 constants.profileButtonTypeAdd.addEventListener('click', () => {
     popupFormAddValidator.disableButton();
-    popupAddCard.textToCreate();
     popupAddCard.openPopup();
 });
 
@@ -187,7 +200,6 @@ constants.profileButtonTypeEdit.addEventListener('click', handleEditProfileClick
 // Слушатель для открытия попапа обновления аватара
 constants.profileButtonTypeEditAvatar.addEventListener('click', () => {
     popupUpdateAvatar.openPopup();
-    popupUpdateAvatar.textSave();
     popupFormUpdate.disableButton();
 });
 

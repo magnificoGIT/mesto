@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirmation extends Popup {
-    constructor(popupSelector, submitCallback) {
+    constructor(popupButton, popupSelector, submitCallback) {
         // Вызываем конструктор базового класса Popup
         super(popupSelector)
         // Находим форму подтверждения удаления и кнопку подтверждения удаления
@@ -9,6 +9,7 @@ export default class PopupWithConfirmation extends Popup {
         this._popupButtonConfirm = this._popup.querySelector('.popup__button_type_confirm-delete');
         // Сохраняем колбэк-функцию, которая будет вызываться при подтверждении удаления
         this._submitCallback = submitCallback;
+        this._popupButton = popupButton;
     }
 
     // Метод для установки слушателей событий
@@ -26,15 +27,5 @@ export default class PopupWithConfirmation extends Popup {
     // Метод для установки колбэка для удаления карточки
     setDeleteCardCallback(callbackDeleteApi) {
         this._submitCallback = callbackDeleteApi;
-    }
-
-    // Метод для изменения текста кнопки подтверждения на "Да"
-    textConfirmation() {
-        this._popupButtonConfirm.textContent = "Да"
-    }
-
-    // Метод для изменения текста кнопки подтверждения на "Удаление..."
-    textDeletion() {
-        this._popupButtonConfirm.textContent = "Удаление..."
     }
 }

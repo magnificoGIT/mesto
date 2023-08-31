@@ -14,7 +14,7 @@ export default class PopupWithForm extends Popup {
     }
 
     // Приватный метод для получения значений полей ввода формы
-    getInputValues() {
+    _getInputValues() {
         // Объект для хранения значений полей формы
         const values = {};
         
@@ -28,6 +28,13 @@ export default class PopupWithForm extends Popup {
         return values;
     }
 
+    // Метод для вставки данных в инпуты
+    setInputValues(data) {
+        this._inputList.forEach((input) => {
+            input.value = data[input.name];
+          });
+    }
+
     setEventListeners() {
         // Вызываем метод установки обработчиков событий родителя класса
         super.setEventListeners();
@@ -36,7 +43,10 @@ export default class PopupWithForm extends Popup {
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
             // Вызываем функцию-коллбэк с передачей значений полей формы
-            this._submitCallback(this.getInputValues());
+            this._submitCallback(this._getInputValues())
+            .then(() => {
+                this.closePopup();
+            })
         })
     }
 
@@ -45,25 +55,5 @@ export default class PopupWithForm extends Popup {
         super.closePopup();
         // Сбрасываем значения полей формы
         this._popupForm.reset();
-    }
-
-    // Метод для установки текста на кнопке "Создать"
-    textToCreate() {
-        this._popupButton.textContent = 'Создать'
-    }
-
-    // Метод для установки текста на кнопке "Создание..."
-    textCreation() {
-        this._popupButton.textContent = 'Создание...'
-    }
-
-    // Метод для установки текста на кнопке "Сохранить"
-    textSave() {
-        this._popupButton.textContent = 'Сохранить'
-    }
-
-    // Метод для установки текста на кнопке "Сохранение..."
-    textPreservation() {
-        this._popupButton.textContent = 'Сохранение...'
     }
 }

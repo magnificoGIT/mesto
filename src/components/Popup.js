@@ -8,6 +8,7 @@ export default class Popup {
         this._popupButtonClose = this._popup.querySelector('.popup__button_type_close');
     }
 
+    // Метод открытия попапа
     openPopup() {
         // Добавляем класс, делающий попап видимым
         this._popup.classList.add('popup_active');
@@ -15,11 +16,19 @@ export default class Popup {
         document.addEventListener('keydown', this._handleEscClose);
     }
 
+    // Метод закрытия попапа
     closePopup() {
         // Удаляем класс, отвечающий за видимость попапа
         this._popup.classList.remove('popup_active');
         // Удаляем обработчик клавиши Esc
         document.removeEventListener('keydown', this._handleEscClose);
+    }
+
+    // Метод для изменения текста кнопки во время загрузки.
+    renderLoading(isLoading, buttonText, defaultButtonText) {
+        // Если значение isLoading равно true, значит, идет загрузка, и мы устанавливаем на кнопке текст buttonText.
+        // В противном случае, загрузка завершена, и мы устанавливаем текст defaultButtonText.
+        this._popupButton.textContent = isLoading ? buttonText : defaultButtonText;
     }
 
     // Приватный метод для обработки события клавиши Esc
